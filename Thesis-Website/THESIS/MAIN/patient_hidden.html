@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Patient Details</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Boxicons CSS -->
+    <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+  <!-- or -->
+  <link rel="stylesheet"
+  href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <style>
+        /* Common styles for both big and small screens */
+        body {
+            padding-top: 40px;
+        }
+
+        .navbar {
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand img {
+            max-height: 45px; /* Adjust the height as needed */
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 18px;
+        }
+
+        .profile-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgb(140, 129, 129);
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (min-width: 992px) {
+            /* Styles for big screens (screens wider than 992px) */
+            .navbar-nav {
+                margin: auto 0;
+            }
+
+            .navbar-nav .nav-item {
+                margin-right: 20px; /* Adjust the margin between nav items */
+            }
+
+            .navbar-nav.ml-1 {
+                max-width: 275px; /* Adjust the width as needed */
+            }
+
+            .profile-link {
+                display: inline-flex; /* Hide the Profile link on larger screens */
+            }
+        }
+
+        @media (max-width: 991px) {
+            /* Styles for small screens (screens 991px or narrower) */
+            .navbar-nav.ml-1 {
+                margin-left: 10px; /* Adjust the margin between About and the user profile */
+            }
+
+            .navbar-nav.ml-1 .nav-item {
+                margin-bottom: 0; /* Remove margin between nav items in collapsed mode */
+            }
+
+            .navbar-nav.mx-auto.nav-item {
+                display: flex;
+                align-items: center;
+            }
+            .navbar-nav.mx-auto .nav-item:last-child {
+                margin-bottom: 30px; /* Add margin below the last nav item in collapsed mode */
+            }
+            .navbar-nav.ml-1 .nav-item .profile-circle {
+                margin-right: 10px; /* Adjust the margin between Profile Circle and Profile */
+            }
+
+            .navbar-nav.ml-1 .nav-item .nav-link {
+                display: flex;
+                align-items: center;
+                white-space: nowrap; /* Prevent text wrapping on smaller screens */
+            }
+
+            .profile-link {
+                display: inline-block; /* Show the Profile link on smaller screens */
+            }
+        }
+
+        /* Add any other styles you need */
+
+        /* Hover effect for patient cards */
+        .card-consultation {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card-consultation:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            background-color: aquamarine;
+        }
+
+        .card-consultation .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-consultation h5 {
+            margin-bottom: 0;
+        }
+
+        /* Close button for the table */
+        .close-button {
+            cursor: pointer;
+            color: #007bff;
+            font-size: 30px;
+            border: none;
+            background-color: none;
+        }
+        .close-button:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">
+            <img src="profile-images/v987-18a.jpg" alt="Your Logo">
+            Gait Assessment Device
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="patients.html">Patients</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-1">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <div class="profile-circle">
+                            <img src="profile-images/IMG_1994.JPG" alt="User Profile">
+                        </div>
+                        <span class="d-lg-none ml-2">Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sign Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content of the patient_details.html page -->
+    <div class="container mt-5" style="margin-top: 300px;">
+        <a href="patients.html" class="btn btn-secondary mb-3">Back to Patients</a>
+        <div class="row justify-content-center align-items-start">
+            <!-- Display patient's picture here -->
+            <div class="col-md-4 mb-5 text-center">
+                <img src="profile-images/IMG_1994.JPG" alt="Patient Picture" class="img-fluid" style="max-width: 140px; border-radius: 50%;">
+            </div>
+            <div class="col-md-8 text-center text-md-left">
+                <!-- Display all patient information here -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="lead"><strong>Name:</strong> Lanz Brent Salmo</p>
+                    </div>
+                    <div class="col-md-12">
+                        <p><strong>Age:</strong> 22</p>
+                    </div>
+                    <div class="col-md-12">
+                        <p><strong>Gender:</strong> Male</p>
+                    </div>
+                    <div class="col-md-12">
+                        <p><strong>Address:</strong> Badoc, Ilocos Norte</p>
+                    </div>
+                </div>
+                <!-- Add the new information fields -->
+                <hr>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <!-- Display consultation date cards here -->
+                    <div class="col-md-3 mb-3">
+                        <div class="card card-consultation" onclick="showTable()">
+                            <div class="card-body">
+                                <h5 class="card-title">Consultation Date 1</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card card-consultation" onclick="showTable()">
+                            <div class="card-body">
+                                <h5 class="card-title">Consultation Date 2</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more cards as needed -->
+                </div>
+            </div>
+            <!-- Hidden table -->
+            <div class="col-md-12" id="consultationTable" style="display: none;">
+                <button class="close-button" onclick="hideTable()"><i class='bx bx-window-close'></i></button>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Consultation Date</th>
+                                <th>Phase</th>
+                                <th>Image</th>
+                                <th>Angles</th>
+                                <th>Weight Distribution</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Date</td>
+                                <td>Phase 1- Frame 2</td>
+                                <td style="max-width: 100px; max-height: 100px;">
+                                    <img src="profile-images/phase1.png" class="mw-100 mh-100" style="width: 100%; height: auto;">
+                                </td>
+                                <td>Angle</td>
+                                <td>Distribution</td>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td>Phase 2- Frame 2</td>
+                                <td style="max-width: 100px; max-height: 100px;">
+                                    <img src="profile-images/phase2.png" class="mw-100 mh-100" style="width: 100%; height: auto;">
+                                </td>
+                                <td>Angle</td>
+                                <td>Distribution</td>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td>Phase 3- Frame 2</td>
+                                <td style="max-width: 100px; max-height: 100px;">
+                                    <img src="profile-images/phase3.png" class="mw-100 mh-100" style="width: 100%; height: auto;">
+                                </td>
+                                <td>Angle</td>
+                                <td>Distribution</td>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td>Phase 4- Frame 2</td>
+                                <td style="max-width: 100px; max-height: 100px;">
+                                    <img src="profile-images/phase4.png" class="mw-100 mh-100" style="width: 100%; height: auto;">
+                                </td>
+                                <td>Angle</td>
+                                <td>Distribution</td>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td>Phase 5- Frame 2</td>
+                                <td style="max-width: 100px; max-height: 100px;">
+                                    <img src="profile-images/phase5.png" class="mw-100 mh-100" style="width: 100%; height: auto;">
+                                </td>
+                                <td>Angle</td>
+                                <td>Distribution</td>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td>Phase 6- Frame 2</td>
+                                <td style="max-width: 100px; max-height: 100px;">
+                                    <img src="profile-images/phase6.png" class="mw-100 mh-100" style="width: 100%; height: auto;">
+                                </td>
+                                <td>Angle</td>
+                                <td>Distribution</td>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td>Phase 7- Frame 2</td>
+                                <td style="max-width: 100px; max-height: 100px;">
+                                    <img src="profile-images/phase7.png" class="mw-100 mh-100" style="width: 100%; height: auto;">
+                                </td>
+                                <td>Angle</td>
+                                <td>Distribution</td>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td>Phase 8- Frame 2</td>
+                                <td style="max-width: 100px; max-height: 100px;">
+                                    <img src="profile-images/phase8.png" class="mw-100 mh-100" style="width: 100%; height: auto;">
+                                </td>
+                                <td>Angle</td>
+                                <td>Distribution</td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Add more information fields as needed -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function showTable() {
+            document.getElementById('consultationTable').style.display = 'block';
+        }
+
+        function hideTable() {
+            document.getElementById('consultationTable').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
