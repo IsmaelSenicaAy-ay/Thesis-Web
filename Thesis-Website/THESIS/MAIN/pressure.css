@@ -1,0 +1,128 @@
+/* CSS for left foot */
+#left-foot {
+    position: relative;
+    width: 100%; /* Default width */
+    max-width: 139px; /* Limit the width for responsiveness */
+    height: auto; /* Adjust height automatically */
+    float: right;
+    margin-right: 40%; /* Add a margin to create space between the feet */
+}
+
+#left-foot img {
+    width: 100%;
+    height: auto;
+}
+
+#left-foot .sensor {
+    position: absolute;
+    width: 20%; /* adjust size as needed */
+    height: 10%; /* adjust size as needed */
+    background-color: black; /* make background black */
+    border-radius: 50%; /* to make it round */
+}
+
+#left-foot .sensor.top-left {
+    top: 30%; /* adjust positioning as needed */
+    left: 20%; /* adjust positioning as needed */
+}
+
+#left-foot .sensor.top-right {
+    top: 38%; /* adjust positioning as needed */
+    left: 60%; /* adjust positioning as needed */
+}
+
+#left-foot .sensor.bottom {
+    bottom: 10%; /* adjust positioning as needed */
+    left: 40%; /* adjust positioning as needed */
+}
+
+/* CSS for right foot */
+#right-foot {
+    position: relative;
+    width: 100%; /* Default width */
+    max-width: 139px; /* Limit the width for responsiveness */
+    height: auto; /* Adjust height automatically */
+    float: left;
+    margin-left: 40%; /* Add a margin to create space between the feet */
+}
+
+#right-foot img {
+    width: 100%;
+    height: auto;
+}
+
+#right-foot .sensor {
+    position: absolute;
+    width: 20%; /* adjust size as needed */
+    height: 10%; /* adjust size as needed */
+    background-color: black; /* make background black */
+    border-radius: 50%; /* to make it round */
+}
+
+#right-foot .sensor.top-left {
+    top: 38%; /* adjust positioning as needed */
+    left: 20%; /* adjust positioning as needed */
+}
+
+#right-foot .sensor.top-right {
+    top: 30%; /* adjust positioning as needed */
+    left: 60%; /* adjust positioning as needed */
+}
+
+#right-foot .sensor.bottom {
+    bottom: 10%; /* adjust positioning as needed */
+    left: 45%; /* adjust positioning as needed */
+}
+
+/* Media Query for responsiveness */
+@media screen and (max-width: 768px) {
+    #left-foot, #right-foot {
+        width: 40%; /* Adjust width for smaller screens */
+        max-width: none; /* Remove max-width for smaller screens */
+    }
+    #left-foot {
+        margin-right: 10%; /* Adjust margin for smaller screens */
+    }
+    #right-foot {
+        margin-left: 10%; /* Adjust margin for smaller screens */
+    }
+}
+
+@media screen and (max-width: 1404px) {
+    #left-foot, #right-foot {
+        width: 40%; /* Adjust width for smaller screens */
+        max-width: none; /* Remove max-width for smaller screens */
+    }
+    #left-foot {
+        margin-right: 10%; /* Adjust margin for smaller screens */
+    }
+    #right-foot {
+        margin-left: 10%; /* Adjust margin for smaller screens */
+    }
+}
+/* CSS for left foot sensors */
+/* #left-foot .sensor::before {
+    content: '';
+    position: absolute;
+    width: 350%; /* Adjust length of the line */
+    height: 2px; /* Adjust thickness of the line */
+    background-color: black; /* Color of the line */
+    top: 50%;
+    left: 0;
+    transform-origin: left top;
+    transform: rotate(-20deg); /* Angle of the line */
+}
+
+/* CSS for right foot sensors */
+#right-foot .sensor::before {
+    content: '';
+    position: absolute;
+    width: 350%; /* Adjust length of the line */
+    height: 2px; /* Adjust thickness of the line */
+    background-color: black; /* Color of the line */
+    top: 50%;
+    right: 0;
+    transform-origin: right top;
+    transform: rotate(20deg); /* Angle of the line */
+} */
+
