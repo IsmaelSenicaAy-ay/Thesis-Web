@@ -1,3 +1,4 @@
+<?php include 'session_check.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -213,7 +214,6 @@
         }
     </style>
 </head>
-<?php include 'conn.php';?>
 <body>
 
     <!-- Navbar -->
@@ -247,7 +247,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sign Out</a>
+                    <a class="nav-link" href="logout.php">Sign Out</a>
                 </li>
             </ul>
         </div>

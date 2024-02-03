@@ -1,3 +1,4 @@
+<?php include 'session_check.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,7 +140,7 @@ tr:hover{
         
     </style>
 </head>
-<?php include 'conn.php';?>
+
 <body>
 
     <!-- Navbar -->
@@ -154,7 +155,7 @@ tr:hover{
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="patients.php">Patients</a>
@@ -174,7 +175,7 @@ tr:hover{
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sign Out</a>
+                    <a class="nav-link" href="logout.php">Sign Out</a>
                 </li>
             </ul>
         </div>

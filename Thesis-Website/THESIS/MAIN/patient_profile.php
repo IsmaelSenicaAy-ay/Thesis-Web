@@ -1,6 +1,6 @@
+<?php include 'session_check.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -106,7 +106,7 @@
         /* Add any other styles you need */
     </style>
 </head>
-<?php include 'conn.php';?>
+
 <body>
 
     <!-- Navbar -->
@@ -122,7 +122,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="patients.php">Patients</a>
