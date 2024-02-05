@@ -6,6 +6,7 @@
     <script type="text/javascript" src="pressure.js"></script>
 </head>
 <body>
+    
     <div id="left-foot">
         <img src="lfoot.png" alt="">
         <div class="sensor top-left"></div>
@@ -18,5 +19,55 @@
         <div class="sensor top-right"></div>
         <div class="sensor bottom"></div>
     </div>
+    <div class="percentage">
+        <h2 id="data"></h2>
+    </div>
+    
+    <script>
+        var x = setInterval(function() {
+            loadData("http://192.168.98.121/data.txt", updateData);
+        }, 100);
+    
+        function loadData(url, callback) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    callback.apply(xhttp);
+                }
+            };  
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+    
+        function updateData() {
+        document.getElementById("data").innerHTML = this.responseText;
+        var responseData = this.responseText;
+        var numericValue = parseFloat(responseData.replace('%', '')); // Remove '%' symbol and parse float
+        var rightFootSensor = document.querySelector('#right-foot .sensor.bottom');
+
+        if (!isNaN(numericValue)) { // Check if the parsed value is a valid number
+            if (numericValue >= 85) {
+                rightFootSensor.style.backgroundColor = 'red'; // Red color
+                rightFootSensor.style.opacity = '100%'
+            } else if (numericValue <= 84.99 && numericValue  >= 50) {
+                rightFootSensor.style.opacity = '50%';
+                rightFootSensor.style.backgroundColor = 'red';
+            }
+            else if (numericValue <= 50 && numericValue  >= 30) {
+                rightFootSensor.style.opacity = '20%';
+                rightFootSensor.style.backgroundColor = 'red';
+            }
+            else{
+                rightFootSensor.style.backgroundColor = 'rgb(117, 117, 117, 0.5)'; // Green color
+                rightFootSensor.style.width = '20%'; // Reset width
+                rightFootSensor.style.height = '10%'; // Reset height
+                rightFootSensor.style.left = '45%';
+            }
+        }
+    }
+
+    </script>
+    
+
 </body>
 </html>
