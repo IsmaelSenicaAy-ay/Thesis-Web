@@ -3,29 +3,34 @@
 <head>
     <title>Pressure</title>
     <link rel="stylesheet" type="text/css" href="pressure.css">
+    <style>
+        /* Your existing CSS styles can be placed here */
+    </style>
     <script type="text/javascript" src="pressure.js"></script>
 </head>
 <body>
     
-    <div id="left-foot">
-        <img src="lfoot.png" alt="">
-        <div class="sensor top-left"></div>
-        <div class="sensor top-right"></div>
-        <div class="sensor bottom"></div>
-    </div>
     <div id="right-foot">
         <img src="rfoot.png" alt="">
-        <div class="sensor top-left"></div>
-        <div class="sensor top-right"></div>
         <div class="sensor bottom"></div>
+        <div class="sensor top-right"></div>
+        <div class="sensor top-left"></div>
     </div>
+
+    <div id="left-foot">
+        <img src="lfoot.png" alt="">
+        <div class="sensor bottom"></div>
+        <div class="sensor top-right"></div>
+        <div class="sensor top-left"></div>
+    </div>
+
     <div class="percentage">
         <h2 id="data"></h2>
     </div>
     
     <script>
         var x = setInterval(function() {
-            loadData("http://192.168.98.121/data.txt", updateData);
+            loadData("http://192.168.103.121/data.txt", updateData);
         }, 100);
     
         function loadData(url, callback) {
@@ -40,34 +45,73 @@
         }
     
         function updateData() {
-        document.getElementById("data").innerHTML = this.responseText;
-        var responseData = this.responseText;
-        var numericValue = parseFloat(responseData.replace('%', '')); // Remove '%' symbol and parse float
-        var rightFootSensor = document.querySelector('#right-foot .sensor.bottom');
+            document.getElementById("data").innerHTML = this.responseText;
+            var responseData = this.responseText;
 
-        if (!isNaN(numericValue)) { // Check if the parsed value is a valid number
-            if (numericValue >= 85) {
-                rightFootSensor.style.backgroundColor = 'red'; // Red color
-                rightFootSensor.style.opacity = '100%'
-            } else if (numericValue <= 84.99 && numericValue  >= 50) {
-                rightFootSensor.style.opacity = '50%';
-                rightFootSensor.style.backgroundColor = 'red';
-            }
-            else if (numericValue <= 50 && numericValue  >= 30) {
-                rightFootSensor.style.opacity = '20%';
-                rightFootSensor.style.backgroundColor = 'red';
-            }
-            else{
-                rightFootSensor.style.backgroundColor = 'rgb(117, 117, 117, 0.5)'; // Green color
-                rightFootSensor.style.width = '20%'; // Reset width
-                rightFootSensor.style.height = '10%'; // Reset height
-                rightFootSensor.style.left = '45%';
-            }
-        }
-    }
+            // Split the response into individual FSR percentage values
+            var fsrValues = responseData.split(" ");
 
-    </script>
+            // Iterate through each FSR value
+            fsrValues.forEach(function(item) {
+                // Split each item by ':' to separate the FSR identifier and the percentage value
+                var parts = item.split(":");
+                
+                // Extract the percentage value (parts[1]) for each FSR
+                var percentage = parseFloat(parts[1].replace('%', '')); 
+                var percentage2 = parseFloat(parts[2].replace('%', '')); 
+                var percentage3 = parseFloat(parts[3].replace('%', '')); 
+
+                // Now you can use the percentage value as needed
     
 
+                // Get the sensors for the left foot and right foot
+                var leftFootBottomSensor = document.querySelector('#left-foot .sensor.bottom');
+                var leftFootTopLeftSensor = document.querySelector('#left-foot .sensor.top-left');
+                var leftFootTopRightSensor = document.querySelector('#left-foot .sensor.top-right');
+                var rightFootBottomSensor = document.querySelector('#right-foot .sensor.bottom');
+                var rightFootTopLeftSensor = document.querySelector('#right-foot .sensor.top-left');
+                var rightFootTopRightSensor = document.querySelector('#right-foot .sensor.top-right');
+                
+
+                if (!isNaN(percentage)) { 
+                    if (percentage >= 85) {
+                        rightFootBottomSensor.style.backgroundColor = 'red';
+                    } else if (percentage <= 84.99 && percentage >= 50) {
+                        rightFootBottomSensor.style.backgroundColor = 'orange';
+                    } else if (percentage <= 50 && percentage >= 30) {
+                        rightFootBottomSensor.style.backgroundColor = 'yellow';
+                    } else {
+                        rightFootBottomSensor.style.backgroundColor = 'rgb(117, 117, 117)';
+                    }
+                } else {
+                    rightFootBottomSensor.style.backgroundColor = 'rgb(117, 117, 117)';
+                }
+
+                if (!isNaN(percentage2)) { 
+                    if (percentage2 >= 85) {
+                        rightFootTopLeftSensor.style.backgroundColor = 'red';
+                    } else if (percentage2 <= 84.99 && percentage2 >= 50) {
+                        rightFootTopLeftSensor.style.backgroundColor = 'orange';
+                    } else if (percentage2 <= 50 && percentage2 >= 30) {
+                        rightFootTopLeftSensor.style.backgroundColor = 'yellow';
+                    } else {
+                        rightFootTopLeftSensor.style.backgroundColor = 'rgb(117, 117, 117)';
+                    }
+                }
+
+                if (!isNaN(percentage3)) { 
+                    if (percentage3 >= 85) {
+                        rightFootTopRightSensor.style.backgroundColor = 'red';
+                    } else if (percentage3 <= 84.99 && percentage3 >= 50) {
+                        rightFootTopRightSensor.style.backgroundColor = 'orange';
+                    } else if (percentage3 <= 50 && percentage3 >= 30) {
+                        rightFootTopRightSensor.style.backgroundColor = 'yellow';
+                    } else {
+                        rightFootTopRightSensor.style.backgroundColor = 'rgb(117, 117, 117)';
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>

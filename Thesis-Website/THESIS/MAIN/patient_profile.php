@@ -149,7 +149,7 @@
 
     <!-- Content of the patient_details.html page -->
     <div class="container mt-5">
-        <a href="patients.php" class="btn btn-secondary mb-3">Back to Patients</a>
+        <a href="patients2.php" class="btn btn-secondary mb-3">Back to Patients</a>
         <div class="row justify-content-center align-items-start">
             <!-- Display patient's picture here -->
             <div class="col-md-4 mb-5 text-center">

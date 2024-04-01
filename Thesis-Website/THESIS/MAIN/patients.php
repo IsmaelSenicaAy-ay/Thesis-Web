@@ -181,27 +181,29 @@ tr:hover{
         </div>
     </nav>
 
-    <div class="container mt-5" style="margin-top: 100px;">
-        <!-- Search Bar -->
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for a patient..." aria-label="Search" aria-describedby="searchButton">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button" id="searchButton">Search</button>
-            </div>
+<div class="container mt-4">
+    <form method="GET" action="">
+        <div class="form-group">
+            <input type="text" class="form-control" name="search" placeholder="Search">
         </div>
-    </div>
-
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 
 <!-- Patient Cards -->
 <div class="container mt-4">
     <div class="row">
-
         <?php 
-        $result = $mysqli->query("SELECT * FROM patients_data") or die($mysqli->error());
+        if(isset($_GET['search'])) {
+            $search = $_GET['search'];
+            $result = $mysqli->query("SELECT * FROM patients_data WHERE Name LIKE '%$search%' OR Age LIKE '%$search%' OR pCase LIKE '%$search%'") or die($mysqli->error());
+        } else {
+            $result = $mysqli->query("SELECT * FROM patients_data") or die($mysqli->error());
+        }
+        
         while($row = $result->fetch_assoc()):
         $id =  $row['ID']; 
         ?>
-
         <div class="col-lg-4 mb-4">
             <div class="card shadow">
                 <div class="card-body d-flex justify-content-between">
@@ -219,9 +221,7 @@ tr:hover{
                 </div>
             </div>
         </div>
-
         <?php endwhile; ?>
-        
     </div>
 </div>
 

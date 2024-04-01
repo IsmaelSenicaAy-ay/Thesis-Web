@@ -259,7 +259,7 @@
             <div class="col-lg-9 col-md-9 col-sm-9">
                 <!-- Content for the left section -->
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for a patient..." aria-label="Search" aria-describedby="searchButton">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search for a patient..." aria-label="Search" aria-describedby="searchButton">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button" id="searchButton">Search</button>
                     </div>
@@ -316,7 +316,7 @@
                 <div class="container mt-4 d-flex justify-content-center align-items-center">
                     <div id="addPatientSection">
                         <h2 class="mb-3">Add Patient</h2>
-                        <form>
+                        <form action="add_patient.php" method="POST">
                             <div class="form-group">
                                 <label for="patientName">Patient Name:</label>
                                 <input type="text" class="form-control" id="patientName" name="patientName" placeholder="Enter patient name">
@@ -332,7 +332,7 @@
                                 <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Add Patient</button>
+                            <button type="submit" name="add" class="btn btn-primary">Add Patient</button>
                         </form>
                     </div>
                 </div>
@@ -391,5 +391,25 @@
             });
         });
     </script>
+    <script>
+    $(document).ready(function() {
+        $('#searchButton').click(function() {
+            // Get the search input value
+            var searchText = $('#searchInput').val().toLowerCase();
+
+            // Loop through each table row
+            $('tbody tr').each(function() {
+                var patientName = $(this).find('td:nth-child(2)').text().toLowerCase();
+
+                // If the patient name matches the search input, show the row, otherwise hide it
+                if (patientName.includes(searchText)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
