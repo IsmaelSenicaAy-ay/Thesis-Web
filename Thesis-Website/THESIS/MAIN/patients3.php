@@ -8,7 +8,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <style>
         /* Common styles for both big and small screens */
         body {
@@ -298,7 +302,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="logout.php">Sign Out</a>
+                    <a class="nav-link sign_out" style="background-color: #13bc4e; color: #ffffff; padding: 5px 10px; border-radius: 15px; font-size: 15px;" href="login.html">Sign Out</a>
                 </li>
             </ul>
         </div>
@@ -307,7 +311,7 @@
     <div class="container-fluid mt-5">
         <div class="row">
             <!-- Search Bar -->
-            <div class="col-lg-9 col-md-9 col-sm-9">
+            <div class="col-lg-8 col-md-9 col-sm-9">
                 <!-- Content for the left section -->
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for a patient..." aria-label="Search" aria-describedby="searchButton">
@@ -319,12 +323,11 @@
                     </div>
                 </div>
 
+                <!-- Add pagination controls below the table -->
                 <div class="container mt-4">
-                    <!-- Table to display patients -->
-                    <table class="table table-bordered">
-                        <thead>
+                    <table class="table table-bordered ">
+                        <thead class="thead-color">
                             <tr>
-                                <th hidden>ID</th>
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Case</th>
@@ -332,7 +335,7 @@
                             </tr>
                         </thead>
                         <tbody class="limited-rows">
-                            <?php 
+                           <?php 
                                 $result = $mysqli->query("SELECT * FROM patients_data") or die($mysqli->error());
                                 while($row = $result->fetch_assoc()):
                                 $id =  $row['ID']; 
@@ -348,13 +351,24 @@
                                 </td>
                             </tr>
                             <?php endwhile; ?>
-                            <!-- Add more rows as needed -->
                         </tbody>
+                         <!-- Pagination controls -->
+                    <div class="text-center pagination-container">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled" id="previousPage">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <!-- Pagination numbers will be added dynamically using JavaScript -->
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item" id="nextPage">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </div>
                     </table>
-                    
+                   
                 </div>
             </div>
-           
 
             
 
@@ -380,7 +394,7 @@
                                 <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Add Patient</button>
+                            <button type="submit" name="add"  id="add"class="btn btn-primary">Add Patient</button>
                         </form>
                     </div>
                 </div>
@@ -440,24 +454,69 @@
         });
     </script>
     <script>
-    $(document).ready(function() {
-        $('#searchButton').click(function() {
-            // Get the search input value
-            var searchText = $('#searchInput').val().toLowerCase();
+        $(document).ready(function() {
+    // Number of rows per page
+    var rowsPerPage = 8;
 
-            // Loop through each table row
-            $('tbody tr').each(function() {
-                var patientName = $(this).find('td:nth-child(2)').text().toLowerCase();
+    // Total number of rows
+    var totalRows = $('.limited-rows tr').length;
 
-                // If the patient name matches the search input, show the row, otherwise hide it
-                if (patientName.includes(searchText)) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-        });
+    // Total number of pages
+    var totalPages = Math.ceil(totalRows / rowsPerPage);
+
+    // Hide all rows initially except the first page
+    $('.limited-rows tr').hide();
+    $('.limited-rows tr:lt(' + rowsPerPage + ')').show();
+
+    // Pagination functionality
+    var currentPage = 1;
+    $('#nextPage').click(function() {
+        if (currentPage < totalPages) {
+            $('.limited-rows tr').hide();
+            var startIndex = currentPage * rowsPerPage;
+            var endIndex = startIndex + rowsPerPage;
+            $('.limited-rows tr').slice(startIndex, endIndex).show();
+            currentPage++;
+            updatePaginationState();
+        }
     });
-</script>
+
+    $('#previousPage').click(function() {
+        if (currentPage > 1) {
+            currentPage--;
+            $('.limited-rows tr').hide();
+            var startIndex = (currentPage - 1) * rowsPerPage;
+            var endIndex = startIndex + rowsPerPage;
+            $('.limited-rows tr').slice(startIndex, endIndex).show();
+            updatePaginationState();
+        }
+    });
+
+    // Function to update pagination state (enable/disable buttons)
+    function updatePaginationState() {
+        if (totalPages <= 1) {
+            $('.pagination').hide();
+        } else {
+            $('.pagination').show();
+        }
+        if (currentPage == 1) {
+            $('#previousPage').addClass('disabled');
+        } else {
+            $('#previousPage').removeClass('disabled');
+        }
+        if (currentPage == totalPages) {
+            $('#nextPage').addClass('disabled');
+        } else {
+            $('#nextPage').removeClass('disabled');
+        }
+    }
+    
+    // Update pagination state initially
+    updatePaginationState();
+});
+
+    </script>
+    
+    
 </body>
 </html>

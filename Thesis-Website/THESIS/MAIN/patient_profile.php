@@ -13,6 +13,8 @@
         /* Common styles for both big and small screens */
         body {
             padding-top: 40px;
+            font-family: 'Catamaran', sans-serif;
+            background-color: #ffffff;
         }
 
         .navbar {
@@ -103,7 +105,16 @@
             transition: box-shadow 0.3s, transform 0.3s;
         }
 
-        /* Add any other styles you need */
+        .btn-secondary{
+            background-color: transparent;
+            color: #000000 !important;
+            border: none;
+            transition: ease-in 0.25s;
+        }
+        .btn-secondary:hover{
+            background-color: #d3d3c9;
+        }
+        
     </style>
 </head>
 
@@ -149,14 +160,13 @@
 
     <!-- Content of the patient_details.html page -->
     <div class="container mt-5">
-        <a href="patients2.php" class="btn btn-secondary mb-3">Back to Patients</a>
+        <a href="patients3.php" class="btn btn-secondary mb-3">Back to Patients</a>
         <div class="row justify-content-center align-items-start">
             <!-- Display patient's picture here -->
             <div class="col-md-4 mb-5 text-center">
                 <img src="profile-images/IMG_1994.JPG" alt="Patient Picture" class="img-fluid"
                     style="max-width: 140px; border-radius: 50%;">
             </div>
-            <div class="col-md-8 text-center text-md-left">
             <div class="col-md-8 text-center text-md-left">
             <?php 
                 if(isset($_GET['id'])) {
@@ -189,7 +199,7 @@
         </div>
 
 
-            <div class="col-md-12">
+        <div class="col-md-12">
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -205,6 +215,8 @@
                         </tbody>
                     </table>
                 </div>
+                <!-- Add more information fields as needed -->
+            </div>
                 <!-- Add more information fields as needed -->
             </div>
         </div>
