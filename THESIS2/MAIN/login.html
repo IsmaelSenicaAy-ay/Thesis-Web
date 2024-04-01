@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Login</title>
+
+    <style>
+        
+        body{
+            background-image: linear-gradient(to bottom, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+            background-size:cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: bebas;
+            margin: 0;
+            
+        }
+
+        .column {
+            float: left;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden; /* Add this line */
+        }
+
+        .right{
+            width: 35%;
+            color: white;
+            display: flex;
+            flex-direction: column ;
+            
+        }
+        .right h3 {
+            position: relative; /* Add relative positioning to the h2 element */
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .right h3::after {
+            content: ""; 
+            display: block;
+            width: 100%; 
+            height: 4px; 
+            background-color: white; 
+            position: absolute;
+            bottom: -10px; 
+            left: 0;
+            border-radius: 20px;
+            border: 1px;
+        }
+        
+        .right p{
+            display: flex;
+            flex-direction: column ;
+            font-size: 15px;
+            font-weight: 50;
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            margin-bottom: 40px;
+        }
+        .left{
+            width: 65%;
+            display: flex;
+            flex-direction: column ;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: 10px 10px 20px #888888;
+            border-radius: 20px;
+        }
+
+        .hidden{
+            display: none;
+        }
+        .hidden{
+            text-align: center;
+        }
+        .hidden a{
+            text-decoration: none;
+            color: #19e6c7;
+            border:  3px solid #19e6c7;
+            padding: 5px;
+            border-radius: 20px;
+        }
+        
+        @media (max-width: 767px) {
+        .container {
+            flex-direction: column; /* Stack columns on smaller screens */
+        }
+
+        .left {
+            width: 100%; /* Full width on smaller screens */
+            text-align: center;
+        }
+
+        .right {
+            display: none; /* Add some space between the sections */
+        }
+        .hidden{
+            display: block !important;
+        }
+        
+    }
+
+        .left h2{
+            
+            width: 55%;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: black;
+            font-size: 30px;
+            text-align: center;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .container{
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .row{
+            margin-left: 0px;
+            width: 100%;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        form  {
+            background-color: #fdfdfd;
+            display:flex;
+            flex-direction: column;
+            padding:20px;
+            width: 55%;
+            border-radius:20px;
+            
+        }
+        input[type=text],[type=password]{
+            border-radius: 30px;
+        }
+        input[type=text],[type=submit],[type=password]  {
+        margin: 10px 0px;
+        height:35px;
+        
+        border:0.5px solid gray;
+        }
+
+        input[type=submit]{
+            background-color: #19e6c7;
+            padding: 10px;
+            height: auto;
+            width: 50%;
+            align-self: center;
+            font-family: bebas;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 20px;
+            border:  none;
+            box-shadow: 5px 5px 10px #888888;
+        }
+        input[type=submit]:hover{
+        background-color: #41dfff;
+        border: none;
+        color: #c777b9;
+        transition: 0.4s ease-in-out ;
+        }
+        input:focus{
+        outline: none;
+        border: 1px solid gold;
+
+        }
+        input[type="text"]::placeholder,[type="password"]::placeholder{
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .icon-input-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        }
+
+        .icon-input-container i {
+        margin-right: 10px;
+        font-size: 20px;
+        }
+
+        .icon-input-container input {
+        flex: 1;
+        padding: 5px;
+        border: 1px solid #ccc;
+        }
+
+        .login {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-align: center;
+        
+        }
+        .signup{
+            text-align: center;
+
+        }
+        
+        .signup a{
+        font-size: 15px;
+        text-decoration: none;
+        background-color: #fff;
+        padding: 10px;
+        height: auto;
+        width: 50%;
+        align-self: center;
+        font-family: bebas;
+        color: #19e6c7;
+        font-size: 15px;
+        cursor: pointer;
+        border-radius: 20px;
+        text-decoration: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="column left"> 
+                <h2>Login to your account</h2>
+                <form>
+                    
+                  <div class="icon-input-container">
+                    <i class='bx bx-user'></i>
+                    <input type="text" id="Username" name="Username" placeholder="Username">
+                  </div>
+                  
+                  
+                  <div class="icon-input-container">
+                    <i class='bx bx-lock-alt'></i>
+                    <input type="password" id="password" name="password" placeholder="Password">
+                  </div>
+                  <input type="submit" id="submit" value="Login">
+
+                  <div class="hidden">
+                  <h3>Dont have an account?</h3>
+                  <a href="#" class="registerButton"> Register Now</a>
+                </div>
+              </form>
+            </div>
+            <div class="column right">
+        
+                <div class="signup">
+                  <h3>Dont have an account?</h3>
+                  <p>Sign up now to access the  full features of our platform.</p>
+                  <a href="signup.html" class="registerButton"> Register Now</a>
+                </div>
+                
+            </div>
+          </div>
+    </div>
+</body>
+</html>
