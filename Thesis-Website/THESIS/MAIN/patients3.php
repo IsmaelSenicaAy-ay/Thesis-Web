@@ -345,8 +345,10 @@
                                 <td><?php echo $row['Name'] ?></td>
                                 <td><?php echo $row['Age'] ?></td>
                                 <td><?php echo $row['pCase'] ?></td>
-                                <td>
+                                <td style="text-align:center">
                                 <a href="patient_profile.php?id=<?php echo $id; ?>" class="btn actionButt btn-sm">View</a>
+                                </a>
+                                <a href="javascript:void(0);" onclick="confirmDelete(<?php echo $id; ?>)" class="btn actionButt btn-sm">Delete</a>
                                 </a>
                                 </td>
                             </tr>
@@ -372,35 +374,32 @@
 
             
 
-            <!-- Add Patient Section -->
             <div class="col-lg-4 col-md-3 col-sm-3">
-                <!-- Content for the right section -->
-                <div class="container mt-4 d-flex justify-content-center align-items-center">
-                    <div id="addPatientSection">
-                        <h5 class="mb-3 text-center">Add Patient</h5>
-                        <form action="add_patient.php" method="POST">
-                            <div class="form-group">
-                                <label for="patientName">Patient Name:</label>
-                                <input type="text" class="form-control" id="patientName" name="patientName" placeholder="Enter patient name">
-                            </div>
+            <!-- Content for the right section -->
+            <div class="container mt-4 d-flex justify-content-center align-items-center">
+                <div id="addPatientSection">
+                    <h5 class="mb-3 text-center">Add Patient</h5>
+                    <form action="add_patient.php" method="POST" onsubmit="return validateForm()">
+                        <div class="form-group">
+                            <label for="patientName">Patient Name:</label>
+                            <input type="text" class="form-control" id="patientName" name="patientName" placeholder="Enter patient name">
+                        </div>
 
-                            <div class="form-group">
-                                <label for="age">Age:</label>
-                                <input type="text" class="form-control" id="age" name="age" placeholder="Enter age">
-                            </div>
+                        <div class="form-group">
+                            <label for="age">Age:</label>
+                            <input type="text" class="form-control" id="age" name="age" placeholder="Enter age">
+                        </div>
 
-                            <div class="form-group">
-                                <label for="address">Address:</label>
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
-                            </div>
+                        <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
+                        </div>
 
-                            <button type="submit" name="add"  id="add"class="btn btn-primary">Add Patient</button>
-                        </form>
-                    </div>
+                        <button type="submit" name="add" id="add" class="btn btn-primary">Add Patient</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
 
     <div class="modal fade" id="addPatientModal" tabindex="-1" role="dialog" aria-labelledby="addPatientModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -515,8 +514,55 @@
     updatePaginationState();
 });
 
+    function confirmDelete(patientId) { //pang delete
+        if (confirm("Are you sure you want to delete this patient?")) {
+            window.location.href = 'delete_patient.php?id=' + patientId;
+        }
+    }
+    function validateForm() {
+        var patientName = document.getElementById("patientName").value.trim();
+        var age = document.getElementById("age").value.trim();
+        var address = document.getElementById("address").value.trim();
+
+        if (patientName === "" || age === "" || address === "") {
+            alert("Please ensure all fields are filled out correctly before proceeding.");
+            return false;
+        }
+
+        // Validate age is a number
+        if (isNaN(age)) {
+            alert("Please enter a valid age in numbers.");
+            return false;
+        }
+
+        // Validate age is within a certain range (e.g., 1-150)
+        if (parseInt(age) < 1 || parseInt(age) > 150) {
+            alert("Age should be between 1 and 150.");
+            return false;
+        }
+
+        // Validate address length
+        if (address.length < 5) {
+            alert("Please provide a more detailed address.");
+            return false;
+        }
+
+        // Validate patient name using a regular expression
+        var nameRegex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+        if (!nameRegex.test(patientName)) {
+            alert("Please enter a valid patient name.");
+            return false;
+        }
+
+        // Additional validation logic can be added here
+
+        return true; // Submit the form if validation passes
+    }
+
     </script>
     
+
     
+
 </body>
 </html>
