@@ -6,57 +6,71 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAIT CYCLE ASSESMENT DEVICE.</title>
+    <title>GAIT CYCLE ASSESSMENT DEVICE.</title>
+    <style>
+        .fa-times {
+            display: none; /* Hide the times icon by default */
+        }
+    </style>
 </head>
-<?php include 'session.php'; ?>
-
-
-
-<body class="align">
-    <div class="intro">
-        <h1 class="logo-header">
-            <span class="logo">Gait Cycle  </span><span> </span><span class="logo"> Assesment Device.</span>
-        </h1>
+<body>
+    <div class="intro-text">
+        <div class="fade-in word-spacing">Gait</div>
+        <div class="fade-in word-spacing" style="animation-delay: 0.5s;">Assessment</div>
+        <div class="fade-in word-spacing" style="animation-delay: 1s;">Device.</div>
     </div>
-    <div class="login">
+    <div class="module form-module">
+        <div class="toggle">
+            <i class="fas fa-pencil-alt"></i> <!-- Pencil icon -->
+            <i class="fas fa-times"></i> <!-- X icon -->
+            <span class="tooltip">Click Me</span>
+        </div>
+        <div class="form">
+            <h2>Login to your account</h2>
+            <form>
+                <input type="text" placeholder="Username">
+                <input type="password" placeholder="Password">
+                <button>Login</button>
+            </form>
+        </div>
+        <div class="form">
+            <h2>Create an account</h2>
+            <form>
+                <input type="text" placeholder="Username">
+                <input type="password" placeholder="Password">
+                <input type="email" placeholder="Email Address">
+                <input type="tel" placeholder="Phone Number">
+                <button>Register</button>
+            </form>
+        </div>
+        <div class="cta">
+            <a href="http://andytran.me">Forgot your password?</a>
+        </div>
+    </div>
 
-        <header class="login__header">
-          <h2><svg class="icon">
-              <use xlink:href="#icon-lock" />
-            </svg>Sign In</h2>
-        </header>
-    
-        <form action="" class="login__form" method="POST">
-    
-          <div>
-            <label for="username">Username</label>
-            <input type="email"  name="email"  placeholder="Enter Username Here">
-          </div>
-    
-          <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" placeholder="Enter Password Here">
-          </div>
-    
-          <div>
-            <input class="button" type="submit" name="login" id="login" value="Sign In">
-          </div>
-    
-        </form>
-    
-      </div>
-    
-      <svg xmlns="http://www.w3.org/2000/svg" class="icons">
-    
-        <symbol id="icon-lock" viewBox="0 0 448 512">
-          <path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z" />
-        </symbol>
-    
-      </svg>
-
-
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
+    <script>
+        $(document).ready(function() { // Ensure script executes after DOM is loaded
+            // Hide the intro text after 2 seconds
+            setTimeout(function() {
+                $('.intro-text').fadeOut();
+            }, 2000);
+            
+            // Toggle Function
+            $('.toggle').click(function(){
+                $(this).find('.fa-pencil-alt').toggle(); // Toggle visibility of pencil icon
+                $(this).find('.fa-times').toggle(); // Toggle visibility of times icon
+                // Switches the forms  
+                $('.form').animate({
+                    height: "toggle",
+                    'padding-top': 'toggle',
+                    'padding-bottom': 'toggle',
+                    opacity: "toggle"
+                }, "slow");
+            });
+        });
+    </script>
 </body>
-<script src="app.js"></script>
 </html>
