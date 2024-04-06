@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GAIT CYCLE ASSESSMENT DEVICE.</title>
     <style>
@@ -15,6 +15,7 @@
         }
     </style>
 </head>
+<?php include 'session.php'; ?>
 <body>
     <div class="intro-text">
         <div class="fade-in word-spacing">Gait</div>
@@ -27,21 +28,26 @@
             <i class="fas fa-times"></i> <!-- X icon -->
             <span class="tooltip">Click Me</span>
         </div>
-        <div class="form">
+        <div class="form login-form">
             <h2>Login to your account</h2>
-            <form>
-                <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
-                <button>Login</button>
+            <form action="" class="login__form" method="POST">
+                <input type="text" name="email" placeholder="Username">
+                <div class="input-container">
+                    <input type="password" name="password" id="loginPasswordInput" placeholder="Password">
+                    <i class="fas fa-eye-slash toggle-password" data-target="loginPasswordInput"></i>
+                </div>
+                <button name="login" id="login">Login</button>
             </form>
         </div>
-        <div class="form">
+        <div class="form register-form">
             <h2>Create an account</h2>
             <form>
                 <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
-                <input type="email" placeholder="Email Address">
-                <input type="tel" placeholder="Phone Number">
+                <div class="input-container">
+                    <input type="password" id="registerPasswordInput" placeholder="Password">
+                    <i class="fas fa-eye-slash toggle-password" data-target="registerPasswordInput"></i>
+                </div>
+                <input type="email" placeholder="Email Address">        
                 <button>Register</button>
             </form>
         </div>
@@ -52,23 +58,51 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
     <script>
-        $(document).ready(function() { // Ensure script executes after DOM is loaded
+        $(document).ready(function() {
             // Hide the intro text after 2 seconds
             setTimeout(function() {
                 $('.intro-text').fadeOut();
             }, 2000);
-            
-            // Toggle Function
+
+            // Toggle Function for switching between forms
             $('.toggle').click(function(){
-                $(this).find('.fa-pencil-alt').toggle(); // Toggle visibility of pencil icon
-                $(this).find('.fa-times').toggle(); // Toggle visibility of times icon
-                // Switches the forms  
+                $(this).find('.fa-pencil-alt, .fa-times').toggle(); // Toggle visibility of icons
                 $('.form').animate({
                     height: "toggle",
-                    'padding-top': 'toggle',
-                    'padding-bottom': 'toggle',
+                    paddingTop: 'toggle',
+                    paddingBottom: 'toggle',
                     opacity: "toggle"
                 }, "slow");
+            });
+
+            // Toggle Password Visibility for Login Form
+            $('.login-form .toggle-password').click(function() {
+                const passwordInput = $('#loginPasswordInput');
+                const icon = $(this);
+
+                // Toggle password visibility
+                if (passwordInput.attr('type') === 'password') {
+                    passwordInput.attr('type', 'text');
+                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                } else {
+                    passwordInput.attr('type', 'password');
+                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                }
+            });
+
+            // Toggle Password Visibility for Registration Form
+            $('.register-form .toggle-password').click(function() {
+                const passwordInput = $('#registerPasswordInput');
+                const icon = $(this);
+
+                // Toggle password visibility
+                if (passwordInput.attr('type') === 'password') {
+                    passwordInput.attr('type', 'text');
+                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                } else {
+                    passwordInput.attr('type', 'password');
+                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                }
             });
         });
     </script>

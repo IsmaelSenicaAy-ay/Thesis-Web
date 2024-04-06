@@ -1,70 +1,27 @@
-
-
 .container {
-    margin-top: 100px; /* Adjust as needed */
+  margin-top: 100px; /* Adjust as needed */
 }
 
 /* Main Colors */
-:root {
-  --accent: #190482;
-  --white: #ffffff;
-  --black: #000000;
-  --dark-gray: rgba(0, 0, 0, 0.2);
-  --gray: rgba(0, 0, 0, 0.4);
-  --light-gray: rgba(0, 0, 0, 0.6);
-  --lighter-gray: rgba(0, 0, 0, 0.8);
-}
-
-/* Pen Settings */
-:root {
-  --module-width: 320px;
-}
-
 body {
   background: whitesmoke;
-  color: var(--gray);
+  color: rgba(0, 0, 0, 0.4);
   font-family: 'RobotoDraft', 'Roboto', sans-serif;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Pen Title */
-.pen-title {
-  padding: 50px 0;
-  text-align: center;
-  letter-spacing: 2px;
-}
-
-.pen-title h1 {
-  margin: 0 0 20px;
-  font-size: 48px;
-  font-weight: 300;
-}
-
-.pen-title span {
-  font-size: 12px;
-}
-
-.pen-title .fa {
-  color: var(--accent);
-}
-
-.pen-title a {
-  color: var(--accent);
-  font-weight: 600;
-  text-decoration: none;
-}
-
 /* Form Module */
 .form-module {
   position: relative;
-  background: var(--white);
-  max-width: var(--module-width);
+  background: #ffffff; /* White */
+  max-width: 340px; /* Module width */
   width: 100%;
-  border-top: 5px solid var(--accent);
+  border-top: 5px solid #190482; /* Accent color */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   margin: 0 auto;
+  top:340px;
 }
 
 .form-module .toggle {
@@ -72,11 +29,11 @@ body {
   position: absolute;
   top: -0;
   right: -0;
-  background: var(--accent);
+  background: #190482; /* Accent color */
   width: 30px;
   height: 30px;
   margin: -5px 0 0;
-  color: var(--white);
+  color: #ffffff; /* White */
   font-size: 12px;
   line-height: 30px;
   text-align: center;
@@ -87,7 +44,7 @@ body {
   top: 5px;
   right: -65px;
   display: block;
-  background: var(--dark-gray);
+  background: rgba(0, 0, 0, 0.2); /* Dark gray */
   width: auto;
   padding: 5px;
   font-size: 10px;
@@ -103,7 +60,7 @@ body {
   display: block;
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  border-right: 5px solid var(--dark-gray);
+  border-right: 5px solid rgba(0, 0, 0, 0.2); /* Dark gray */
 }
 
 .form-module .form {
@@ -117,7 +74,7 @@ body {
 
 .form-module h2 {
   margin: 0 0 20px;
-  color: var(--accent);
+  color: #190482; /* Accent color */
   font-size: 18px;
   font-weight: 400;
   line-height: 1;
@@ -127,7 +84,7 @@ body {
   outline: none;
   display: block;
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.85); /* White with opacity */
   margin: 0 0 20px;
   padding: 10px 15px;
   box-sizing: border-box;
@@ -135,21 +92,21 @@ body {
 }
 
 .form-module input:focus {
-  border: 1px solid var(--accent);
-  color: var(--dark-gray);
+  border: 1px solid #190482; /* Accent color */
+  color: rgba(0, 0, 0, 0.4); /* Dark gray */
 }
 
 .form-module button {
   cursor: pointer;
-  background: var(--accent);
+  background: #190482; /* Accent color */
   width: 100%;
   border: 0;
   padding: 10px 15px;
-  color: var(--white);
+  color: #ffffff; /* White */
 }
 
 .form-module button:hover {
-  background: #190482;
+  background: #190482; /* Accent color */
 }
 
 .form-module .cta {
@@ -157,99 +114,111 @@ body {
   width: 100%;
   padding: 15px 40px;
   box-sizing: border-box;
-  color: var(--gray);
+  color: rgba(0, 0, 0, 0.4); /* Dark gray */
   font-size: 12px;
   text-align: center;
 }
 
 .form-module .cta a {
-  color: var(--dark-gray);
+  color: rgba(0, 0, 0, 0.4); /* Dark gray */
   text-decoration: none;
 }
-.form-module {
-    position: relative;
-    background: var(--white);
-    max-width: var(--module-width);
-    width: 100%;
-    border-top: 5px solid var(--accent);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
-    margin-top: 250px; /* Adjust as needed */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .fade-in {
-    animation: fadeIn 2s ease forwards;
-    opacity: 0;
-  }
-  
-  @keyframes fadeIn {
-    0% {
+
+.fade-in {
+  animation: fadeIn 2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  0% {
       opacity: 0;
       transform: translateY(20px);
-    }
-    100% {
+  }
+  100% {
       opacity: 1;
       transform: translateY(0);
-    }
   }
-  
-  .intro-text {
-    position: relative;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-size: 104px;
-    color: #190482;
-    overflow: hidden;
-  }
-  
+}
+
+.intro-text {
+  position: relative;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 104px;
+  color: #190482; /* Accent color */
+  overflow: hidden;
+}
+
 .fade-in .word-spacing {
-    animation: fade-in-word 2s ease forwards;
-    opacity: 0;
-    transform: translateY(20px);
+  animation: fade-in-word 2s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 @keyframes fade-in-word {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }
 
 .word-spacing {
-    margin-right: 10px;
+  margin-right: 7px;
 }
 
-
-.word-spacing {
-    margin-right: 7px;
-}
 @media screen and (max-width: 768px) {
-    .intro-text {
-        font-size: 44px;
-    }
+  .intro-text {
+      font-size: 44px;
+  }
 }
 
 @media screen and (max-width: 480px) {
-    .intro-text {
-        font-size: 34px;
-    }
+  .intro-text {
+      font-size: 34px;
+  }
 }
+
 @keyframes fade-out {
-    0% {
-        opacity: 1;
-        filter: blur(0);
-    }
-    100% {
-        opacity: 0;
-        filter: blur(10px);
-    }
+  0% {
+      opacity: 1;
+      filter: blur(0);
+  }
+  100% {
+      opacity: 0;
+      filter: blur(10px);
+  }
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-container input {
+  width: calc(100% - 30px); /* Adjust width of input field */
+}
+
+.toggle-password {
+  position: absolute;
+  top: 1%;
+  right: 0;
+  cursor: pointer;
+  padding: 10px;
+  color: rgba(0, 0, 0, 0.4); /* Dark gray */
+}
+.toggle-password2 {
+  position: absolute;
+  top: 1%;
+  right: 0;
+  cursor: pointer;
+  padding: 10px;
+  color: rgba(0, 0, 0, 0.4); /* Dark gray */
 }
