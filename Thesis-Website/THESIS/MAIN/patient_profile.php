@@ -160,67 +160,81 @@
 
     <!-- Content of the patient_details.html page -->
     <div class="container mt-5">
-        <a href="patients3.php" class="btn btn-secondary mb-3">Back to Patients</a>
-        <div class="row justify-content-center align-items-start">
-            <!-- Display patient's picture here -->
-            <div class="col-md-4 mb-5 text-center">
-                <img src="profile-images/IMG_1994.JPG" alt="Patient Picture" class="img-fluid"
-                    style="max-width: 140px; border-radius: 50%;">
-            </div>
-            <div class="col-md-8 text-center text-md-left">
+    <a href="patients3.php" class="btn btn-secondary mb-3">Back to Patients</a>
+    <div class="row justify-content-center align-items-start">
+        <?php 
+            if(isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $result = $mysqli->query("SELECT * FROM patients_data WHERE ID = '$id'") or die($mysqli->error());
+                if($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+        ?>
+        <div class="col-md-4 mb-5 text-center">
             <?php 
-                if(isset($_GET['id'])) {
-                    $id = $_GET['id'];
-                    $result = $mysqli->query("SELECT * FROM patients_data WHERE ID = '$id'") or die($mysqli->error());
-                    while($row = $result->fetch_assoc()):
+                // Display patient profile picture if available
+                if (!empty($row['Image'])) {
+                    $profileImagePath = 'uploads/' . $row['Image'];
             ?>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="lead"><strong>Name:</strong> <?php echo $row['Name'];?></p>
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Age:</strong><?php echo $row['Age'];?></p>
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Gender:</strong> <?php echo $row['Gender'];?></p>
-                        </div>
-                        <div class="col-md-12">
-                            <p><strong>Address:</strong> <?php echo $row['Address'];?></p>
-                        </div>
-                    </div>
-                    <!-- Add the new information fields -->
-                    <hr>
+            <img src="<?php echo $profileImagePath; ?>" alt="Patient Picture" class="img-fluid"
+                style="max-width: 140px; border-radius: 50%;">
             <?php 
-                    endwhile;
                 } else {
-                    echo "No ID parameter provided.";
+                    ?>
+                    <img src="uploads/unkown.jpg" alt="Patient Picture" class="img-fluid"
+                        style="max-width: 140px; border-radius: 50%;">
+                    <?php 
                 }
             ?>
         </div>
-
-
-        <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Consultation Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="clickable-row">
-                                <td>December 08, 2001 - 12:00 am</td>
-                            </tr>
-                            <!-- Add more rows as needed -->
-                        </tbody>
-                    </table>
+        <div class="col-md-8 text-center text-md-left">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="lead"><strong>Name:</strong> <?php echo $row['Name'];?></p>
                 </div>
-                <!-- Add more information fields as needed -->
+                <div class="col-md-12">
+                    <p><strong>Age:</strong> <?php echo $row['Age'];?></p>
+                </div>
+                <div class="col-md-12">
+                    <p><strong>Gender:</strong> <?php echo $row['Gender'];?></p>
+                </div>
+                <div class="col-md-12">
+                    <p><strong>Address:</strong> <?php echo $row['Address'];?></p>
+                </div>
             </div>
-                <!-- Add more information fields as needed -->
-            </div>
+            <!-- Add additional patient information fields here -->
+            <hr>
         </div>
+        <?php 
+            } else {
+                echo "No patient found with this ID.";
+            }
+        } else {
+            echo "No ID parameter provided.";
+        }
+        ?>
     </div>
+
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Consultation Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="clickable-row">
+                        <td>December 08, 2001 - 12:00 am</td>
+                    </tr>
+                    <!-- Add more rows for consultation dates -->
+                </tbody>
+            </table>
+        </div>
+        <!-- Add more information fields as needed -->
+    </div>
+    <!-- Add more information fields as needed -->
+</div>
+
 
    <!-- Modal for Consultation Details -->
 <div class="modal fade" id="consultationModal" tabindex="-1" role="dialog" aria-labelledby="consultationModalLabel"

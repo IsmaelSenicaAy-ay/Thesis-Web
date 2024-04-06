@@ -31,7 +31,7 @@
         <div class="form login-form">
             <h2>Login to your account</h2>
             <form action="" class="login__form" method="POST">
-                <input type="text" name="email" placeholder="Username">
+                <input type="text" name="email" placeholder="Username or Email">
                 <div class="input-container">
                     <input type="password" name="password" id="loginPasswordInput" placeholder="Password">
                     <i class="fas fa-eye-slash toggle-password" data-target="loginPasswordInput"></i>
@@ -41,14 +41,14 @@
         </div>
         <div class="form register-form">
             <h2>Create an account</h2>
-            <form>
-                <input type="text" placeholder="Username">
+            <form action="" class="reg_form" method="POST">
+                <input type="text" name="rusername" placeholder="Username">
                 <div class="input-container">
-                    <input type="password" id="registerPasswordInput" placeholder="Password">
+                    <input type="password" id="registerPasswordInput" name="rpassword" placeholder="Password">
                     <i class="fas fa-eye-slash toggle-password" data-target="registerPasswordInput"></i>
                 </div>
-                <input type="email" placeholder="Email Address">        
-                <button>Register</button>
+                <input type="email" name="remail"placeholder="Email Address">        
+                <button name="register" id="register">Register</button>
             </form>
         </div>
         <div class="cta">

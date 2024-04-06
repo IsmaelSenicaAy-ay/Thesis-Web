@@ -373,13 +373,12 @@
             </div>
 
             
-
             <div class="col-lg-4 col-md-3 col-sm-3">
             <!-- Content for the right section -->
             <div class="container mt-4 d-flex justify-content-center align-items-center">
                 <div id="addPatientSection">
                     <h5 class="mb-3 text-center">Add Patient</h5>
-                    <form action="add_patient.php" method="POST" onsubmit="return validateForm()">
+                    <form action="add_patient.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                         <div class="form-group">
                             <label for="patientName">Patient Name:</label>
                             <input type="text" class="form-control" id="patientName" name="patientName" placeholder="Enter patient name">
@@ -391,8 +390,22 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="address">Address:</label>
                             <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profileImage">Profile Image:</label>
+                            <input type="file" class="form-control-file" id="profileImage" name="profileImage">
                         </div>
 
                         <button type="submit" name="add" id="add" class="btn btn-primary">Add Patient</button>
@@ -400,43 +413,53 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="addPatientModal" tabindex="-1" role="dialog" aria-labelledby="addPatientModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addPatientModalLabel">Add Patient</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addPatientForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="patientName">Patient Name:</label>
+                                <input type="text" class="form-control" id="patientName" name="patientName" placeholder="Enter patient name">
+                            </div>
 
-    <div class="modal fade" id="addPatientModal" tabindex="-1" role="dialog" aria-labelledby="addPatientModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addPatientModalLabel">Add Patient</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="patientName">Patient Name:</label>
-                            <input type="text" class="form-control" id="patientName" name="patientName" placeholder="Enter patient name">
-                        </div>
+                            <div class="form-group">
+                                <label for="age">Age:</label>
+                                <input type="text" class="form-control" id="age" name="age" placeholder="Enter age">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="age">Age:</label>
-                            <input type="text" class="form-control" id="age" name="age" placeholder="Enter age">
-                        </div>
+                            <div class="form-group">
+                                <label for="gender">Gender:</label>
+                                <select class="form-control" id="gender" name="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="address">Address:</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
-                        </div>
+                            <div class="form-group">
+                                <label for="address">Address:</label>
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
+                            </div>
 
-                        
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add Patient</button>
+                            <div class="form-group">
+                                <label for="profileImage">Profile Image:</label>
+                                <input type="file" class="form-control-file" id="profileImage" name="profileImage">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" onclick="addPatient()">Add Patient</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -560,7 +583,47 @@
     }
 
     </script>
-    
+    <script>
+    function validateForm() {
+        // Retrieve form inputs
+        const patientName = document.getElementById('patientName').value;
+        const age = document.getElementById('age').value;
+        const address = document.getElementById('address').value;
+        const gender = document.getElementById('gender').value;
+        const profileImage = document.getElementById('profileImage').value;
+
+        // Perform validation
+        if (patientName.trim() === '') {
+            alert('Please enter patient name.');
+            return false;
+        }
+
+        if (age.trim() === '') {
+            alert('Please enter patient age.');
+            return false;
+        }
+
+        if (address.trim() === '') {
+            alert('Please enter patient address.');
+            return false;
+        }
+
+        // Additional validation logic for gender and profile image
+        // Ensure at least one option is selected for gender
+        if (gender === '') {
+            alert('Please select patient gender.');
+            return false;
+        }
+
+        // Validate profile image upload (optional, can be further enhanced)
+        if (profileImage.trim() === '') {
+            alert('Please select a profile image.');
+            return false;
+        }
+
+        return true; // Form is valid, proceed with submission
+    }
+</script>
 
     
 

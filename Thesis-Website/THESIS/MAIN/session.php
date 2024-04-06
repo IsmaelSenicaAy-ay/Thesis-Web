@@ -24,4 +24,19 @@ if (isset($_POST['login'])) {
         }
     }
 }
+if(isset($_POST['register'])) {
+    $username = $_POST['rusername'];
+    $password = $_POST['rpassword'];
+    $email = $_POST['remail'];
+
+    if(empty($username) || empty($password) || empty($email)) {
+        echo "All fields are required.";
+        exit;
+    }
+
+    $stmt = $mysqli->prepare("INSERT INTO account (username, password, email) VALUES (?, ?, ?)");
+    $stmt->execute([$username, $password, $email]);
+
+    echo "Registration successful. You can now login.";
+}
 ?>
